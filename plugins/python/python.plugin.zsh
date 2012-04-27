@@ -1,5 +1,4 @@
-# Find python file
-alias pyfind='find . -name "*.py"'
+PYTHON_VIRTUAL_ENV_ROOT="$HOME/python"
 
 # Remove python compiled byte-code in either current directory or in a
 # list of specified directories
@@ -11,4 +10,3 @@ function pyclean() {
 
 # Grep among .py files
 alias pygrep='grep --include="*.py"'
-

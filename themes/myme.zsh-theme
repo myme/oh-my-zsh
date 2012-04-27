@@ -2,14 +2,18 @@ if [ "$(whoami)" = "root" ]; then CARETCOLOR="red"; else CARETCOLOR="blue"; fi
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-function chroot() {
+function virtenv() {
     if [ -z "$debian_chroot" ] && [ -r "/etc/debian_chroot" ]; then
-        debian_chroot=$(cat /etc/debian_chroot)
+        local debian_chroot=$(cat /etc/debian_chroot)
         echo "($debian_chroot) "
+    fi
+    if [ -n "$VIRTUAL_ENV" ]; then
+        local virtual_env="${VIRTUAL_ENV#${PYTHON_VIRTUAL_ENV_ROOT}/}"
+        echo "($virtual_env) "
     fi
 }
 
-PROMPT='%{${fg[red]}%}$(chroot)%{$reset_color%}%m %{${fg_bold[blue]}%}:: %{$reset_color%}%{${fg[green]}%}%3~ $(git_prompt_info)%{${fg_bold[$CARETCOLOR]}%}»%{${reset_color}%} '
+PROMPT='%{${fg[red]}%}$(virtenv)%{$reset_color%}%m %{${fg_bold[blue]}%}:: %{$reset_color%}%{${fg[green]}%}%3~ $(git_prompt_info)%{${fg_bold[$CARETCOLOR]}%}»%{${reset_color}%} '
 
 RPS1="${return_code}"
 
