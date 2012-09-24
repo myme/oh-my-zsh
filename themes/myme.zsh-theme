@@ -8,7 +8,7 @@ function virtenv() {
         echo "($debian_chroot) "
     fi
     if [ -n "$VIRTUAL_ENV" ]; then
-        local virtual_env="${VIRTUAL_ENV#${PYTHON_VIRTUAL_ENV_ROOT}/}"
+        local virtual_env="${VIRTUAL_ENV#${WORKON_HOME}/}"
         echo "($virtual_env) "
     fi
 }
